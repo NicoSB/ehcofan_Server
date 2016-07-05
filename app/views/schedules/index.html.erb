@@ -1,0 +1,18 @@
+<h1>Schedule Control Panel</h1>
+ 
+<%= form_for :schedule, url: schedule_path(@schedule), method: :patch  do |f| %>
+  <p>
+    <%= f.label :running %><br>
+    <%= f.check_box :running %>
+  </p>
+
+  <p>
+    <%= f.label :interval %><br>
+    <%= f.number_field :interval %>
+  </p>
+  
+  <p>
+    <%= f.submit %>
+  </p>
+  <% end %>
+</table>
