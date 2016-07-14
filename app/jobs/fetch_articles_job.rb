@@ -43,7 +43,9 @@ class FetchArticlesJob < ActiveJob::Base
 				#Text
 				elsif line =~ /<p>.+<\/p>/
 					cache_article.text = fetch_text cache_article.url
-					article = Article.create(title: cache_article.title, url: cache_article.url, text: cache_article.text, date: cache_article.date)
+					image_url = fetch_image_url cache_article.url
+					cache_article.news_image = URI.parse(image_url)    
+					article = Article.create(title: cache_article.title, url: cache_article.url, text: cache_article.text, date: cache_article.date, news_image: cache_article.news_image)
 					trigger = false
 				#url
 				elsif line =~ /\/de\/newsdetail.+.html/
@@ -74,8 +76,6 @@ class FetchArticlesJob < ActiveJob::Base
 		year1 = date1.slice(/201[0-9]/)
 		year2 = date2.slice(/201[0-9]/)
 
-		puts year1
-		puts year2
 		if(year1 != year2)
 			return year1 < year2
 		else
@@ -94,11 +94,6 @@ class FetchArticlesJob < ActiveJob::Base
 				month2 = date2[date2.index(".") + 2, date2.index(".", 3)]
 			end
 
-			puts month1
-			puts month2
-			puts day1
-			puts day2
-
 			if(month1 != month2)
 				return month1 < month2
 			elsif(day1 != day2)
@@ -107,5 +102,23 @@ class FetchArticlesJob < ActiveJob::Base
 				return true
 			end
 		end
+	end
+
+	def fetch_image_url(article_url)
+		require 'open-uri'
+		file = open(article_url)
+
+		contents = file.readlines
+		contents.each do |line|
+			if line =~ /<img alt=.+/
+				image_url = line.slice(/\/upload.+g/)
+				if(image_url != nil)
+					image_url = "http://www.ehco.ch" + image_url
+					return image_url
+				end
+			end
+		end
+		puts "couldn't fetch image from: " + article_url
+		return nil
 	end
 end

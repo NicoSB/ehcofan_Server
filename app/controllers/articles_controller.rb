@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
 
 	def index
 		@articles = Article.limit(5).offset(params[:offset]).order("date DESC")
-		render :json => @articles 	
+		render :json => @articles, :except=>[:news_image_file_size, :news_image_updated_at, :news_image_content_type, :updated_at, :created_at, ]
 	end
 
   	def show
