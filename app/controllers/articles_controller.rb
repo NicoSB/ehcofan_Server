@@ -51,7 +51,7 @@ class ArticlesController < ApplicationController
 			}.to_json
 
 			request.body = "[ #{@to_send} ]"
-			puts @to_send
+			puts "JSON: " + @to_send
 
 			puts "----------------- send notification"
 			res = https.request(request)
