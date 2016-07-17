@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
 	def create
 		@article = Article.new(article_params)
 		if @article.save
+			send_notification
 			redirect_to @article
 		else
 			render 'new'
@@ -26,5 +27,30 @@ class ArticlesController < ApplicationController
   	private
 		def article_params
 			params.require(:article).permit(:title, :text, :url, :date)	
+		end
+
+		def send_notification
+			require 'net/http'
+			require 'net/https'
+			require 'uri'
+
+			uri = URI.parse("https://fcm.googleapis.com/fcm/send")
+			https = Net::HTTP.new(uri.host,uri.port)
+			https.use_ssl = true
+			request = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json', 'Authorization' => 'key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE'})
+
+			@notification = {
+				"title" => "Testmessage",
+				"body" => "Teesswdakjlhfg"
+			}.to_json
+
+			@to_send = { 
+				"to" => "/topics/news",
+				"notification" => @notification
+			}.to_json
+
+			request.body = "[ #{@to_send} ]"
+			res = https.request(request)
+			puts "Response #{res.code} #{res.message}: #{res.body}"
 		end
 end
