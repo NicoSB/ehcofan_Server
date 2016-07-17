@@ -42,20 +42,19 @@ class ArticlesController < ApplicationController
 			https.use_ssl = true
 			request = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json', 'Authorization' => 'key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE'})
 
-			@notification = {
-				"title" => "Testmessage",
-				"body" => "Teesswdakjlhfg"
-			}.to_json
-
 			@to_send = { 
 				"to" => "/topics/news",
-				"notification" => @notification
+				"notification" => {
+					"title" => "Testmessage",
+					"body" => "Teesswdakjlhfg"
+				}
 			}.to_json
 
 			request.body = "[ #{@to_send} ]"
+			puts @to_send
 
 			puts "----------------- send notification"
-			res = https.request(request)
-			puts "Response #{res.code} #{res.message}: #{res.body}"
+			#res = https.request(request)
+			#puts "Response #{res.code} #{res.message}: #{res.body}"
 		end
 end
