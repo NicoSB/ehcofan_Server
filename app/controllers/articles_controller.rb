@@ -54,7 +54,7 @@ class ArticlesController < ApplicationController
 			puts @to_send
 
 			puts "----------------- send notification"
-			#res = https.request(request)
-			#puts "Response #{res.code} #{res.message}: #{res.body}"
+			res = https.request(request)
+			puts "Response #{res.code} #{res.message}: #{res.body}"
 		end
 end
