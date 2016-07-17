@@ -40,12 +40,10 @@ class ArticlesController < ApplicationController
 			uri = URI.parse("https://fcm.googleapis.com/fcm/send")
 			https = Net::HTTP.new(uri.host,uri.port)
 			https.use_ssl = true
-			request = Net::HTTP::Post.new(uri.path)
-			#headers = {
-			#	"Content-Type" => "application/json",
-			#	"Authorization" => "key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE"
-			#}
-			#code = request.head(uri.path, headers)
+			headers = {
+			  'Authorization' => "key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE",
+			  'Content-Type' => 'application/json'
+			}.to_json
 
 			@to_send = { 
 				"to" => "/topics/news",
@@ -55,11 +53,13 @@ class ArticlesController < ApplicationController
 				}
 			}.to_json
 
-			request.body = "[ #{@to_send} ]"
+			request = Net::HTTP::Post.new(uri.path, headers, @to_send)
+
+			#request.body = "[ #{@to_send} ]"
 			puts "JSON: " + @to_send
 
 			puts "----------------- send notification"
-			res = https.request(request)
+			#res = https.request(request)
 			puts "Response #{res.code} #{res.message}: #{res.body}"
 		end
 end
