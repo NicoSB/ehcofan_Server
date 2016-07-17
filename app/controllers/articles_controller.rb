@@ -39,6 +39,7 @@ class ArticlesController < ApplicationController
 
 			uri = URI.parse("https://fcm.googleapis.com/fcm/send")
 			https = Net::HTTP.new(uri.host,uri.port)
+			path = '/url'
 			https.use_ssl = true
 			headers = {
 			  'Authorization' => "key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE",
@@ -53,7 +54,14 @@ class ArticlesController < ApplicationController
 				}
 			}.to_json
 
-			request = Net::HTTP::Post.new(uri.path, headers, @to_send)
+
+			headers = {
+			  'Cookie' => cookie,
+			  'Content-Type' => 'application/json'
+			}
+
+			res = http.post(path, @to_send, headers)
+			#request = Net::HTTP::Post.new(uri.path, @to_send, headers)
 
 			#request.body = "[ #{@to_send} ]"
 			puts "JSON: " + @to_send
