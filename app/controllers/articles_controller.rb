@@ -54,7 +54,7 @@ class ArticlesController < ApplicationController
 				}
 			}.to_json
 
-			res = http.post(path, @to_send, headers)
+			res = https.post(path, @to_send, headers)
 			#request = Net::HTTP::Post.new(uri.path, @to_send, headers)
 
 			#request.body = "[ #{@to_send} ]"
