@@ -41,11 +41,11 @@ class ArticlesController < ApplicationController
 			https = Net::HTTP.new(uri.host,uri.port)
 			https.use_ssl = true
 			request = Net::HTTP::Post.new(uri.path)
-			headers = {
+			#headers = {
 				"Content-Type" => "application/json",
 				"Authorization" => "key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE"
 			}
-			code = request.head(uri.path, headers)
+			#code = request.head(uri.path, headers)
 
 			@to_send = { 
 				"to" => "/topics/news",
