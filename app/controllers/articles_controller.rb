@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
 	def create
 		@article = Article.new(article_params)
 		if @article.save
+			puts "----------------- Saving successful"
 			send_notification
 			redirect_to @article
 		else
@@ -34,6 +35,8 @@ class ArticlesController < ApplicationController
 			require 'net/https'
 			require 'uri'
 
+			puts "----------------- Trying to send notification"
+
 			uri = URI.parse("https://fcm.googleapis.com/fcm/send")
 			https = Net::HTTP.new(uri.host,uri.port)
 			https.use_ssl = true
@@ -50,6 +53,8 @@ class ArticlesController < ApplicationController
 			}.to_json
 
 			request.body = "[ #{@to_send} ]"
+
+			puts "----------------- send notification"
 			res = https.request(request)
 			puts "Response #{res.code} #{res.message}: #{res.body}"
 		end
