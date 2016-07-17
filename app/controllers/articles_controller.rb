@@ -42,9 +42,9 @@ class ArticlesController < ApplicationController
 			https.use_ssl = true
 			request = Net::HTTP::Post.new(uri.path)
 			#headers = {
-				"Content-Type" => "application/json",
-				"Authorization" => "key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE"
-			}
+			#	"Content-Type" => "application/json",
+			#	"Authorization" => "key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE"
+			#}
 			#code = request.head(uri.path, headers)
 
 			@to_send = { 
