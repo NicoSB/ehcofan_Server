@@ -46,7 +46,6 @@ class FetchArticlesJob < ActiveJob::Base
 					image_url = fetch_image_url cache_article.url
 					cache_article.news_image = URI.parse(image_url)    
 					article = Article.create(title: cache_article.title, url: cache_article.url, text: cache_article.text, date: cache_article.date, news_image: cache_article.news_image)
-					sendMessage
 					trigger = false
 				#url
 				elsif line =~ /\/de\/newsdetail.+.html/
@@ -121,28 +120,5 @@ class FetchArticlesJob < ActiveJob::Base
 		end
 		puts "couldn't fetch image from: " + article_url
 		return nil
-	end
-
-	def send_notifications
-		require 'net/http'
-		require 'net/https'
-		require 'uri'
-
-		uri = URI.parse("https://fcm.googleapis.com/fcm/send")
-		request = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json', 'Authorization' => 'key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE'})
-
-		@notification = {
-			"title" => "Testmessage",
-			"body" => "Teesswdakjlhfg"
-		}.to_json
-
-		@to_send = { 
-			"to" => "/topics/news"
-			"notification" => @notification
-		}.to_json
-
-		req.body = "[ #{@to_send}"
-		res = https.request(req)
-		puts "Response #{res.code} #{res.message}: #{res.body}"
 	end
 end
