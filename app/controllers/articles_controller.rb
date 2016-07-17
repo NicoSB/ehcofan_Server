@@ -54,12 +54,6 @@ class ArticlesController < ApplicationController
 				}
 			}.to_json
 
-
-			headers = {
-			  'Cookie' => cookie,
-			  'Content-Type' => 'application/json'
-			}
-
 			res = http.post(path, @to_send, headers)
 			#request = Net::HTTP::Post.new(uri.path, @to_send, headers)
 
