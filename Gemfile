@@ -23,6 +23,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sucker_punch', '~> 2.0'
 gem 'activejob'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'aws-sdk', '~> 2.3'
 
 # Heroku gems
 gem 'rails_12factor'

@@ -46,6 +46,7 @@ class FetchArticlesJob < ActiveJob::Base
 					image_url = fetch_image_url cache_article.url
 					cache_article.news_image = URI.parse(image_url)    
 					article = Article.create(title: cache_article.title, url: cache_article.url, text: cache_article.text, date: cache_article.date, news_image: cache_article.news_image)
+					puts "URL: " + article.news_image.url
 					trigger = false
 				#url
 				elsif line =~ /\/de\/newsdetail.+.html/
