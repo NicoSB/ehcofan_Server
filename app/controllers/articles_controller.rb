@@ -17,8 +17,7 @@ class ArticlesController < ApplicationController
 	def create
 		@article = Article.new(article_params)
 		if @article.save
-			puts "----------------- Saving successful"
-			send_notification
+			send_notification @article
 			redirect_to @article
 		else
 			render 'new'
@@ -30,12 +29,10 @@ class ArticlesController < ApplicationController
 			params.require(:article).permit(:title, :text, :url, :date)	
 		end
 
-		def send_notification
+		def send_notification(article)
 			require 'net/http'
 			require 'net/https'
 			require 'uri'
-
-			puts "----------------- Trying to send notification"
 
 			uri = URI.parse("https://fcm.googleapis.com/fcm/send")
 			https = Net::HTTP.new(uri.host,uri.port)
@@ -48,18 +45,14 @@ class ArticlesController < ApplicationController
 			@to_send = { 
 				"to" => "/topics/news",
 				"notification" => {
-					"title" => "Testmessage",
-					"body" => "Someday this will work, I'm sure"
+					"title" => article.title,
+					"body" => article.text[0,30]
 				}
 			}.to_json
 
-			#res = https.post2(uri.path, @to_send, headers)
 			request = Net::HTTP::Post.new(uri.path, initheader = headers)
-
 			request.body = @to_send
-			puts "JSON: " + @to_send
 
-			puts "----------------- send notification"
 			res = https.request(request)
 			puts "Response #{res.code} #{res.message}: #{res.body}"
 		end
