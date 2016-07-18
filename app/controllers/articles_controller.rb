@@ -56,7 +56,7 @@ class ArticlesController < ApplicationController
 			#res = https.post2(uri.path, @to_send, headers)
 			request = Net::HTTP::Post.new(uri.path, initheader = headers)
 
-			request.body = "[ #{@to_send} ]"
+			request.body = @to_send
 			puts "JSON: " + @to_send
 
 			puts "----------------- send notification"
