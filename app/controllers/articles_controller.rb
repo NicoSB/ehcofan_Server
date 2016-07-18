@@ -43,7 +43,7 @@ class ArticlesController < ApplicationController
 			headers = {
 			  'Authorization' => "key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE",
 			  'Content-Type' => 'application/json'
-			}.to_json
+			}
 
 			@to_send = { 
 				"to" => "/topics/news",
@@ -51,9 +51,9 @@ class ArticlesController < ApplicationController
 					"title" => "Testmessage",
 					"body" => "Teesswdakjlhfg"
 				}
-			}.to_json
+			}
 
-			res = https.post2(uri, @to_send, headers)
+			res = https.post2(uri.path, @to_send, headers)
 			#request = Net::HTTP::Post.new(uri.path, @to_send, headers)
 
 			#request.body = "[ #{@to_send} ]"
