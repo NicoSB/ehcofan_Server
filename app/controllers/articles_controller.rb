@@ -39,7 +39,6 @@ class ArticlesController < ApplicationController
 
 			uri = URI.parse("https://fcm.googleapis.com/fcm/send")
 			https = Net::HTTP.new(uri.host,uri.port)
-			path = '/url'
 			https.use_ssl = true
 			headers = {
 			  'Authorization' => "key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE",
@@ -54,7 +53,7 @@ class ArticlesController < ApplicationController
 				}
 			}.to_json
 
-			res = https.post(path, @to_send, headers)
+			res = https.post2(uri, @to_send, headers)
 			#request = Net::HTTP::Post.new(uri.path, @to_send, headers)
 
 			#request.body = "[ #{@to_send} ]"
