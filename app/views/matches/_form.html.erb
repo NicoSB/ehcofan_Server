@@ -1,0 +1,64 @@
+<%= form_for @match do |f| %>
+ 
+  <% if @match.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@match.errors.count, "error") %> prohibited
+        this match from being saved:
+      </h2>
+      <ul>
+        <% @match.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.text_field :home_team %>
+     vs. 
+    <%= f.text_field :away_team %>
+  </p>
+
+  <p>
+    <%= f.label :competition %> <br>
+    <%= f.text_field :competition %>
+  </p>
+
+  <p>
+    <%= f.label :datetime %><br>
+    <%= f.datetime_field :datetime %>
+  </p>
+
+ 1. Drittel <br>
+    <%= f.number_field :h1 %>
+    :
+    <%= f.number_field :a1 %>
+  </p>
+
+  <p>
+ 2. Drittel <br>
+    <%= f.number_field :h2 %>
+    :
+    <%= f.number_field :a2 %>
+  </p>
+
+  <p>
+ 3. Drittel <br>
+    <%= f.number_field :h3 %>
+    :
+    <%= f.number_field :a3 %>
+  </p>
+
+  <p>
+ Overtime <br>
+    <%= f.number_field :h_ot %>
+    :
+    <%= f.number_field :a_ot %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

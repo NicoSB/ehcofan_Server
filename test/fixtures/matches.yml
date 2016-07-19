@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  home_team: MyString
+  away_team: MyString
+  competition: MyString
+  h1: 1
+  h2: 1
+  h3: 1
+  h_ot: 1
+  a1: 1
+  a2: 1
+  a3: 1
+  a_ot: 1
+  datetime: 2016-07-19
+
+two:
+  home_team: MyString
+  away_team: MyString
+  competition: MyString
+  h1: 1
+  h2: 1
+  h3: 1
+  h_ot: 1
+  a1: 1
+  a2: 1
+  a3: 1
+  a_ot: 1
+  datetime: 2016-07-19
