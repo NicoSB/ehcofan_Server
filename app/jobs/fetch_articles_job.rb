@@ -7,10 +7,10 @@ class FetchArticlesJob < ActiveJob::Base
   	ActiveRecord::Base.connection_pool.with_connection do
   		if(Schedule.count > 0)
 	  		schedule = Schedule.find(1)
-	  		if(schedule.running)
+	  		if(schedule.articles_running)
 	  			puts "------------------------ Scheduled job started: Fetching articles"
 			  	fetch_articles
-			    FetchArticlesJob.perform_in(schedule.interval)
+			    FetchArticlesJob.perform_in(schedule.articles_interval)
 			end
 		end
 	end
