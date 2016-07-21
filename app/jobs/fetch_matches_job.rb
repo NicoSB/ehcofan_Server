@@ -36,9 +36,9 @@ class FetchMatchesJob < ActiveJob::Base
 							competition = "NLB 16/17"
 						elsif line.include? "<h2>Vorbereitungsspiel</h2>"
 							competition = "Vorbereitung"
-						elsif line.include? "<h2>CH-Cup.+</h2>"
+						elsif line.include? "<h2>CH-Cup"
 							competition = "Cup 2016"
-						elsif line =~  /<tr class="skytablerow([2-9]|\d{2,}).+ ">/
+						elsif line =~  /<tr class="skytablerow([2-9]|\d{2,}).+">/
 							game_trigger = true
 						end
 					else
