@@ -3,7 +3,7 @@ class MatchesController < ApplicationController
 		if(params[:competition] != nil)
 			@matches = Match.where(competition: params[:competition]).order("datetime ASC")
 		else
-			@matches = Match.order("datetime DESC")
+			@matches = Match.order("datetime ASC")
 		end
 		render :json => @matches, :except => [:updated_at]
 	end
