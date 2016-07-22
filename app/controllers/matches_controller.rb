@@ -1,7 +1,7 @@
 class MatchesController < ApplicationController
 	def index
 		if(params[:competition] != nil)
-			@matches = Match.where(competition: params[:competition]).order("datetime DESC")
+			@matches = Match.where(competition: params[:competition]).order("datetime ASC")
 		else
 			@matches = Match.order("datetime DESC")
 		end
