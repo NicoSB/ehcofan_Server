@@ -49,7 +49,6 @@ class FetchMatchesJob < ActiveJob::Base
 						elsif line =~ /<td class="skytablecol3  skytableoddcol+./
 							cache_match.away_team = line.slice(/[A-Z][\w\s-]+/)
 							match = Match.create(home_team: cache_match.home_team, away_team: cache_match.away_team, datetime: cache_match.datetime, competition: competition)
-							puts cache_match.home_team + "  " + cache_match.away_team + "  " + cache_match.datetime.strftime("%d.%m.%Y")
 							game_trigger = false
 						elsif line.include? "</table>"
 							trigger = false
@@ -64,5 +63,5 @@ class FetchMatchesJob < ActiveJob::Base
 			date = date[0, date.length - 2] + "20" + date[date.length - 2, 2]
 			time = line.slice(/[0-2][0-9]:[0-5][0-9]/)
 			date = date + " " + time
-		end
+		end 
  end
