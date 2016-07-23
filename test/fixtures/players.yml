@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  surname: MyString
+  birthdate: 2016-07-22
+  ep_id: 1
+  nationality: MyString
+  weight: 1
+  height: 1
+  contract: MyString
+
+two:
+  name: MyString
+  surname: MyString
+  birthdate: 2016-07-22
+  ep_id: 1
+  nationality: MyString
+  weight: 1
+  height: 1
+  contract: MyString

@@ -1,0 +1,69 @@
+<%= form_for @player do |f| %>
+  <% if @player.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@player.errors.count, "error") %> prohibited
+        this player from being saved:
+      </h2>
+      <ul>
+        <% @player.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :surname %><br>
+    <%= f.text_field :surname %>
+  </p>
+
+  <p>
+    <%= f.label :position %><br>
+    <%= f.text_field :position %>
+  </p>
+
+  <p>
+    <%= f.label :number %><br>
+    <%= f.number_field :number %>
+  </p>
+
+  <p>
+    <%= f.label :nationality %><br>
+    <%= f.text_field :nationality %>
+  </p>
+
+  <p>
+    <%= f.label :height %><br>
+    <%= f.number_field :height %>
+  </p>
+
+  <p>
+    <%= f.label :weight %><br>
+    <%= f.number_field :weight %>
+  </p>
+
+  <p>
+    <%= f.label :birthdate %><br>
+    <%= f.date_field :birthdate %>
+  </p>
+
+  <p>
+    <%= f.label :contract %><br>
+    <%= f.text_field :contract %>
+  </p>
+
+  <p>
+    <%= f.label :ep_id %><br>
+    <%= f.number_field :ep_id %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
