@@ -1,6 +1,6 @@
 Player.create("name"=>"Matthias", "surname"=>"Mischler", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>80, "height"=>180, "contract"=>"2017/2018", "number"=>35, "position"=>"Torhüter", "birthdate"=>Date.new(1990,3,21))
 Player.create("name"=>"Dominic", "surname"=>"Nyffeler", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>89, "height"=>183, "contract"=>"2016/2017", "number"=>68, "position"=>"Torhüter", "birthdate"=>Date.new(1992,12,21))
-Player.create("name"=>"Ueli", "surname"=>"Huber", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>85, "height"=>183, "contract"=>"2016/2017", "number"=>10, "position"=>"Flügel", "birthdate"=>Date.new(1995,7,4))
+Player.create("name"=>"Ueli", "surname"=>"Huber", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>85, "height"=>183, "contract"=>"2016/2017", "number"=>10, "position"=>"Stürmer", "birthdate"=>Date.new(1995,7,4))
 Player.create("name"=>"Cédric", "surname"=>"Schneuwly", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>87, "height"=>186, "contract"=>"2017", "number"=>12, "position"=>"Stürmer", "birthdate"=>Date.new(1992,5,19))
 Player.create("name"=>"Stefan", "surname"=>"Hürlimann", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>88, "height"=>176, "contract"=>"2016", "number"=>13, "position"=>"Stürmer", "birthdate"=>Date.new(1985,3,13))
 Player.create("name"=>"Justin", "surname"=>"Feser", "ep_id"=>nil, "nationality"=>"Kanada", "weight"=>82, "height"=>175, "contract"=>"2017/2018", "number"=>22, "position"=>"Stürmer", "birthdate"=>Date.new(1992,7,29))

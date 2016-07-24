@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
 	def index
-		@players = Player.all
+		@players = Player.order("position != 'Torhüter', position != 'Verteidiger', position != 'Stürmer', number ASC")
 		render :json => @players, :except=>[:updated_at, :created_at]
 	end
 
