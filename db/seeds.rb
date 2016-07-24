@@ -1,7 +1,24 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+Player.create("name"=>"Matthias", "surname"=>"Mischler", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>80, "height"=>180, "contract"=>"2017/2018", "number"=>35, "position"=>"Torhüter", "birthdate"=>Date.new(1990,3,21))
+Player.create("name"=>"Dominic", "surname"=>"Nyffeler", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>89, "height"=>183, "contract"=>"2016/2017", "number"=>68, "position"=>"Torhüter", "birthdate"=>Date.new(1992,12,21))
+Player.create("name"=>"Ueli", "surname"=>"Huber", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>85, "height"=>183, "contract"=>"2016/2017", "number"=>10, "position"=>"Flügel", "birthdate"=>Date.new(1995,7,4))
+Player.create("name"=>"Cédric", "surname"=>"Schneuwly", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>87, "height"=>186, "contract"=>"2017", "number"=>12, "position"=>"Stürmer", "birthdate"=>Date.new(1992,5,19))
+Player.create("name"=>"Stefan", "surname"=>"Hürlimann", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>88, "height"=>176, "contract"=>"2016", "number"=>13, "position"=>"Stürmer", "birthdate"=>Date.new(1985,3,13))
+Player.create("name"=>"Justin", "surname"=>"Feser", "ep_id"=>nil, "nationality"=>"Kanada", "weight"=>82, "height"=>175, "contract"=>"2017/2018", "number"=>22, "position"=>"Stürmer", "birthdate"=>Date.new(1992,7,29))
+Player.create("name"=>"Philipp", "surname"=>"Wüst", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>85, "height"=>174, "contract"=>"2017", "number"=>32, "position"=>"Stürmer", "birthdate"=>Date.new(1986,7,10))
+Player.create("name"=>"Remo", "surname"=>"Hirt", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>76, "height"=>178, "contract"=>"2017", "number"=>37, "position"=>"Stürmer", "birthdate"=>Date.new(1985,11,30))
+Player.create("name"=>"Codey", "surname"=>"Burki", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>92, "height"=>185, "contract"=>"2016 plus Option", "number"=>55, "position"=>"Stürmer", "birthdate"=>Date.new(1987,11,17))
+Player.create("name"=>"Diego", "surname"=>"Schwarzenbach", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>80, "height"=>177, "contract"=>"2018", "number"=>72, "position"=>"Stürmer", "birthdate"=>Date.new(1987,5,9))
+Player.create("name"=>"Paolo", "surname"=>"Morini", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>nil, "height"=>nil, "contract"=>"", "number"=>81, "position"=>"Stürmer", "birthdate"=>Date.new(1995,2,2))
+Player.create("name"=>"Cyrill", "surname"=>"Aeschlimann", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>83, "height"=>180, "contract"=>"2016/2017", "number"=>83, "position"=>"Stürmer", "birthdate"=>Date.new(1983,11,18))
+Player.create("name"=>"Marco", "surname"=>"Truttmann", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>75, "height"=>174, "contract"=>"2017", "number"=>94, "position"=>"Stürmer", "birthdate"=>Date.new(1985,2,27))
+Player.create("name"=>"Stefan", "surname"=>"Mäder", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>97, "height"=>190, "contract"=>"2018/2019", "number"=>97, "position"=>"Stürmer", "birthdate"=>Date.new(1990,8,12))
+Player.create("name"=>"Martin", "surname"=>"Ulmer", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>78, "height"=>175, "contract"=>"2018", "number"=>96, "position"=>"Stürmer", "birthdate"=>Date.new(1988,4,26))
+Player.create("name"=>"Reto", "surname"=>"Kobach", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>86, "height"=>180, "contract"=>"2016", "number"=>2, "position"=>"Verteidiger", "birthdate"=>Date.new(1980,4,14))
+Player.create("name"=>"Marc", "surname"=>"Grieder", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>92, "height"=>185, "contract"=>"2018", "number"=>5, "position"=>"Verteidiger", "birthdate"=>Date.new(1984,10,5))
+Player.create("name"=>"Anthony", "surname"=>"Rouiller", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>74, "height"=>174, "contract"=>"2017/2018", "number"=>33, "position"=>"Verteidiger", "birthdate"=>Date.new(1994,2,14))
+Player.create("name"=>"Simon", "surname"=>"Schnyder", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>85, "height"=>180, "contract"=>"2017", "number"=>8, "position"=>"Verteidiger", "birthdate"=>Date.new(1987,2,7))
+Player.create("name"=>"Curtis", "surname"=>"Gedig", "ep_id"=>nil, "nationality"=>"Kanada", "weight"=>93, "height"=>190, "contract"=>"2017/2018", "number"=>79, "position"=>"Verteidiger", "birthdate"=>Date.new(1990,1,31))
+Player.create("name"=>"Remo", "surname"=>"Meister", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>85, "height"=>180, "contract"=>"2017", "number"=>15, "position"=>"Verteidiger", "birthdate"=>Date.new(1987,1,6))
+Player.create("name"=>"Christopher", "surname"=>"Bagnoud", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>96, "height"=>188, "contract"=>"2019", "number"=>57, "position"=>"Verteidiger", "birthdate"=>Date.new(1991,5,19))
+Player.create("name"=>"Remo", "surname"=>"Pargätzi", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>78, "height"=>180, "contract"=>"2017", "number"=>91, "position"=>"Verteidiger", "birthdate"=>Date.new(1987,3,21))
+Player.create("name"=>"Jonathan", "surname"=>"Ast", "ep_id"=>nil, "nationality"=>"Schweiz", "weight"=>102, "height"=>189, "contract"=>"2016/2017", "number"=>95, "position"=>"Verteidiger", "birthdate"=>Date.new(1995,3,13))
