@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722201644) do
+ActiveRecord::Schema.define(version: 20160724212606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,10 +55,14 @@ ActiveRecord::Schema.define(version: 20160722201644) do
     t.integer  "weight"
     t.integer  "height"
     t.string   "contract"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "number"
     t.string   "position"
+    t.string   "player_image_file_name"
+    t.string   "player_image_content_type"
+    t.integer  "player_image_file_size"
+    t.datetime "player_image_updated_at"
   end
 
   create_table "schedules", force: :cascade do |t|

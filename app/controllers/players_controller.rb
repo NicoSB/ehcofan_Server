@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
 	def index
 		@players = Player.order("position != 'Torhüter', position != 'Verteidiger', position != 'Stürmer', number ASC")
-		render :json => @players, :except=>[:updated_at, :created_at]
+		render :json => @players, :except=>[:updated_at, :created_at, :player_image_content_type, :player_image_file_size, :player_image_updated_at]
 	end
 
   	def show
@@ -38,6 +38,6 @@ class PlayersController < ApplicationController
 
 	private
 		def player_params
-			params.require(:player).permit(:name, :surname, :position, :number, :birthdate, :nationality, :weight, :height, :ep_id, :contract)	
+			params.require(:player).permit(:name, :surname, :position, :number, :birthdate, :nationality, :weight, :height, :ep_id, :contract, :player_image)	
 		end
 end
