@@ -1,0 +1,59 @@
+<%= form_for(@team, multipart: true) do |f| %>
+  <% if @team.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@team.errors.count, "error") %> prohibited
+        this team from being saved:
+      </h2>
+      <ul>
+        <% @team.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :competition %><br>
+    <%= f.text_field :competition %>
+  </p>
+
+  <p>
+    <%= f.label :wins %><br>
+    <%= f.number_field :wins %>
+  </p>
+
+  <p>
+    <%= f.label :ot_wins %><br>
+    <%= f.number_field :ot_wins %>
+  </p>
+
+  <p>
+    <%= f.label :ot_losses %><br>
+    <%= f.number_field :ot_losses %>
+  </p>
+
+  <p>
+    <%= f.label :losses %><br>
+    <%= f.number_field :losses %>
+  </p>
+
+  <p>
+    <%= f.label :goals_for %><br>
+    <%= f.number_field :goals_for %>
+  </p>
+
+  <p>
+    <%= f.label :goals_against %><br>
+    <%= f.number_field :goals_against %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
