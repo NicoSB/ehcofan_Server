@@ -1,7 +1,11 @@
 class PlayersController < ApplicationController
 	def index
-		@players = Player.order("position != 'Torhüter', position != 'Verteidiger', position != 'Stürmer', number ASC")
-		render :json => @players, :except=>[:updated_at, :created_at, :player_image_content_type, :player_image_file_size, :player_image_updated_at]
+		if(params[:updated_at] != nil)
+			@players = Player.where("updated_at > :last_updated", {last_updated: params[:updated_at]})
+		else
+			@players = Player.order("position != 'Torhüter', position != 'Verteidiger', position != 'Stürmer', number ASC")
+		end
+		render :json => @players, :except=>[:created_at, :player_image_content_type, :player_image_file_size, :player_image_updated_at]
 	end
 
   	def show
