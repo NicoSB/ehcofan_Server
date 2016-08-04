@@ -21,11 +21,15 @@ class Article < ActiveRecord::Base
 			  'Content-Type' => 'application/json'
 			}
 
+			body = self.text
+			body.slice!("<b>")
+			body.slice!("<strong>")
+			
 			to_send = { 
 				"to" => "/topics/news",
 				"notification" => {
 					"title" => self.title,
-					"body" => self.text[0,30]
+					"body" => body[0,30]
 				}
 			}.to_json
 
