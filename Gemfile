@@ -30,6 +30,7 @@ gem 'rails_12factor'
 ## Puma is recommended for Heroku applications
 gem 'puma'
 
+gem 'delayed_job_active_record'
 
 
 group :development, :test do
