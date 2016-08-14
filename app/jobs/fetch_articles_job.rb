@@ -35,14 +35,15 @@ class FetchArticlesJob < ActiveJob::Base
 					if (newest_article[0] != nil && cache_article.date < newest_article[0].date)
 						return nil
 					end
-					#Title
+				#Title
 				elsif line =~ /<h2>.+<\/h2>/
 					line.slice!("<h2>")
 					line.slice!("<\/h2>")
-					cache_article.title = line.strip
+					cache_article.title = replace_uml line.strip
 				#Text
 				elsif line =~ /<p>.+<\/p>/
 					cache_article.text = fetch_text cache_article.url
+					cache_article.text = replace_uml cache_article.text
 					image_url = fetch_image_url cache_article.url
 					cache_article.news_image = URI.parse(image_url)    
 					article = Article.create(title: cache_article.title, url: cache_article.url, text: cache_article.text, date: cache_article.date, news_image: cache_article.news_image)
@@ -121,5 +122,12 @@ class FetchArticlesJob < ActiveJob::Base
 		end
 		puts "couldn't fetch image from: " + article_url
 		return nil
+	end
+
+	def replace_uml(text)
+		text.gsub! "&uuml", "ü"
+		text.gsub! "&auml", "ä"
+		text.gsub! "&ouml", "ö"
+		return text
 	end
 end
