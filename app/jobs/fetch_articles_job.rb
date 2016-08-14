@@ -39,15 +39,16 @@ class FetchArticlesJob < ActiveJob::Base
 				elsif line =~ /<h2>.+<\/h2>/
 					line.slice!("<h2>")
 					line.slice!("<\/h2>")
-					cache_article.title = replace_uml line.strip
+					cache_article.title = replace_uml ssline.strip
+					puts ".........." + cache_article.title
 				#Text
 				elsif line =~ /<p>.+<\/p>/
 					cache_article.text = fetch_text cache_article.url
 					cache_article.text = replace_uml cache_article.text
+					puts ".........." + cache_article.text
 					image_url = fetch_image_url cache_article.url
 					cache_article.news_image = URI.parse(image_url)    
 					article = Article.create(title: cache_article.title, url: cache_article.url, text: cache_article.text, date: cache_article.date, news_image: cache_article.news_image)
-					puts "URL: " + article.news_image.url
 					trigger = false
 				#url
 				elsif line =~ /\/de\/newsdetail.+.html/
@@ -125,9 +126,9 @@ class FetchArticlesJob < ActiveJob::Base
 	end
 
 	def replace_uml(text)
-		text.gsub! "&uuml", "ü"
-		text.gsub! "&auml", "ä"
-		text.gsub! "&ouml", "ö"
+		text.gsub! "&uuml;", "ü"
+		text.gsub! "&auml;", "ä"
+		text.gsub! "&ouml;", "ö"
 		return text
 	end
 end
