@@ -44,7 +44,6 @@ class FetchArticlesJob < ActiveJob::Base
 				elsif line =~ /<p>.+<\/p>/ || line =~ /<p class="p1">.+<\/p>/
 					cache_article.text = fetch_text cache_article.url
 					cache_article.text = replace_uml cache_article.text
-					puts ".........." + cache_article.text
 					image_url = fetch_image_url cache_article.url
 					cache_article.news_image = URI.parse(image_url)    
 					article = Article.create(title: cache_article.title, url: cache_article.url, text: cache_article.text, date: cache_article.date, news_image: cache_article.news_image)
