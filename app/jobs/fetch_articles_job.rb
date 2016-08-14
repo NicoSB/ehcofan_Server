@@ -39,7 +39,7 @@ class FetchArticlesJob < ActiveJob::Base
 				elsif line =~ /<h2>.+<\/h2>/
 					line.slice!("<h2>")
 					line.slice!("<\/h2>")
-					cache_article.title = replace_uml ssline.strip
+					cache_article.title = replace_uml line.strip
 					puts ".........." + cache_article.title
 				#Text
 				elsif line =~ /<p>.+<\/p>/
