@@ -41,7 +41,7 @@ class FetchArticlesJob < ActiveJob::Base
 					line.slice!("<\/h2>")
 					cache_article.title = replace_uml line.strip
 				#Text
-				elsif line =~ /<p>.+<\/p>/ || line =~ /<p class="p1">.+<\/p>/
+				elsif line =~ /<p[^>]*>/
 					cache_article.text = fetch_text cache_article.url
 					cache_article.text = replace_uml cache_article.text
 					image_url = fetch_image_url cache_article.url
@@ -64,8 +64,8 @@ class FetchArticlesJob < ActiveJob::Base
 		file = open(article_url)
 		contents = file.readlines
 		contents.each do |line| 
-			if line =~ /<p>.+<\/p>/
-				line.slice!(/<p>/)
+			if line =~ /<p[^>]*>/
+				line.slice!(/<p[^>]*>/)
 				line.slice!(/<\/p>/)
 				text = text + line + "<br/>" + "<br/>"
 			end
