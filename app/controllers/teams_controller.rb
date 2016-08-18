@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
 	def index
-		@teams = Team.where(competition: params[:competition]).order("teams.group DESC, wins*3 + ot_wins*2 + ot_losses DESC, goals_for - goals_against DESC , goals_for DESC")
+		@teams = Team.where(competition: params[:competition]).order("teams.group ASC, wins*3 + ot_wins*2 + ot_losses DESC, goals_for - goals_against DESC , goals_for DESC")
 		render :json => @teams, :except=>[:updated_at, :created_at]
 	end
 
