@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
 	def index
-		@teams = Team.where(competition: params[:competition]).order("wins*3 + ot_wins*2 + ot_losses DESC, goals_for - goals_against DESC , goals_for DESC")
+		@teams = Team.where(competition: params[:competition]).order("group DESC, wins*3 + ot_wins*2 + ot_losses DESC, goals_for - goals_against DESC , goals_for DESC")
 		render :json => @teams, :except=>[:updated_at, :created_at]
 	end
 
@@ -38,7 +38,6 @@ class TeamsController < ApplicationController
 
 	private
 		def team_params
-			#comment
-			params.require(:team).permit(:name, :competition, :wins, :ot_wins, :ot_losses, :losses, :goals_for, :goals_against)	
+			params.require(:team).permit(:name, :competition, :wins, :ot_wins, :ot_losses, :losses, :goals_for, :goals_against, :group)	
 		end
 end
