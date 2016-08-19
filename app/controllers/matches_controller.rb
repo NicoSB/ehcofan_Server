@@ -1,10 +1,11 @@
 class MatchesController < ApplicationController
 	def index
-		if(params[:competition] != nil)
-			@matches = Match.where(competition: params[:competition]).order("datetime ASC")
-		else
-			@matches = Match.order("datetime ASC")
-		end
+			if(params[:updated_at] != nil)
+				query = "updated_at > :last_updated", {last_updated: params[:updated_at]}
+				@matches = Match.where(query).order("datetime ASC")
+			else
+				@matches = Match.all.order("datetime ASC")
+			end
 		render :json => @matches, :except => [:updated_at]
 	end
 
