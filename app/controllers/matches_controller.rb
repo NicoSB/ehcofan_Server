@@ -6,7 +6,7 @@ class MatchesController < ApplicationController
 			else
 				@matches = Match.all.order("datetime ASC")
 			end
-		render :json => @matches, :except => [:updated_at]
+		render :json => @matches
 	end
 
   	def show
