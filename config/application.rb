@@ -24,4 +24,8 @@ module EhcofanServer
     config.active_job.queue_adapter = :sucker_punch
     config.active_record.raise_in_transactional_callbacks = true
   end
+  Rails.application.config.after_initialize do
+    FetchArticlesJob.perform_async()
+    FetchMatchesJob.perform_async()
+  end
 end

@@ -8,7 +8,7 @@ class FetchArticlesJob < ActiveJob::Base
   		if(Schedule.count > 0)
 	  		schedule = Schedule.find(1)
 	  		if(schedule.articles_running)
-	  			puts "------------------------ Scheduled job started: Fetching articles"
+	  			puts "------------------------ Scheduled job started: Fetching articles ------------------------"
 			  	fetch_articles
 			    FetchArticlesJob.perform_in(schedule.articles_interval)
 			end
