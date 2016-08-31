@@ -23,10 +23,12 @@ class FetchArticlesJob < ActiveJob::Base
 		newest_article = Article.limit(1).order("date DESC")
 		trigger = false
 		articles = Array.new
-		cache_article = Article.new
 
 		file = open(URL)
 		contents = file.readlines
+		articles = Array.new
+		cache_article = nil
+		
 		contents.each do |line|
 			if trigger
 				#Date
@@ -45,8 +47,11 @@ class FetchArticlesJob < ActiveJob::Base
 					cache_article.text = fetch_text cache_article.url
 					cache_article.text = replace_uml cache_article.text
 					image_url = fetch_image_url cache_article.url
-					cache_article.news_image = URI.parse(image_url)    
-					article = Article.create(title: cache_article.title, url: cache_article.url, text: cache_article.text, date: cache_article.date, news_image: cache_article.news_image)
+					
+					if(image_url != nil)
+						cache_article.news_image = URI.parse(image_url)
+					end
+					articles.push(cache_article)
 					trigger = false
 				#url
 				elsif line =~ /\/de\/newsdetail.+.html/
@@ -54,8 +59,13 @@ class FetchArticlesJob < ActiveJob::Base
 				end
 			elsif line.include? "news-element newsarchiv"
 				trigger = true					
+				cache_article = Article.new
 			end
 		end
+
+		articles.reverse_each do |a|
+			a.save
+		end 
 	end
 	#fetches the text from the given url
 	def fetch_text(article_url)
@@ -111,8 +121,8 @@ class FetchArticlesJob < ActiveJob::Base
 
 		contents = file.readlines
 		contents.each do |line|
-			if line =~ /<img alt=.+/
-				image_url = line.slice(/\/upload.+g/)
+			if line =~ /\s*<img alt=".+" src=".+".+>/
+				image_url = line.slice(/\/upload.+[Gg]/)
 				if(image_url != nil)
 					image_url = "http://www.ehco.ch" + image_url
 					return image_url

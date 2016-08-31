@@ -1,0 +1,43 @@
+Sucker Punch job error for class: 'FetchArticlesJob' args: []
+ActiveRecord::StatementInvalid PG::UndefinedTable: FEHLER:  Relation „schedules“ existiert nicht
+LINE 5:                WHERE a.attrelid = '"schedules"'::regclass
+                                          ^
+:               SELECT a.attname, format_type(a.atttypid, a.atttypmod),
+                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
+                FROM pg_attribute a LEFT JOIN pg_attrdef d
+                  ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+               WHERE a.attrelid = '"schedules"'::regclass
+                 AND a.attnum > 0 AND NOT a.attisdropped
+               ORDER BY a.attnum
+
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:592:in `async_exec'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:592:in `block in exec_no_cache'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/abstract_adapter.rb:472:in `block in log'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activesupport-4.2.6/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/abstract_adapter.rb:466:in `log'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:592:in `exec_no_cache'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:584:in `execute_and_clear'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/postgresql/database_statements.rb:160:in `exec_query'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:733:in `column_definitions'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/postgresql/schema_statements.rb:197:in `columns'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/schema_cache.rb:43:in `columns'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/attributes.rb:93:in `columns'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/model_schema.rb:260:in `column_names'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/relation/calculations.rb:226:in `aggregate_column'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/relation/calculations.rb:252:in `execute_simple_calculation'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/relation/calculations.rb:221:in `perform_calculation'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/relation/calculations.rb:127:in `calculate'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/relation/calculations.rb:42:in `count'
+E:in `count'
+E:/Nico/Documents/Git/Ruby/ehcofan_server/app/jobs/fetch_articles_job.rb:8:in `block in perform'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/activerecord-4.2.6/lib/active_record/connection_adapters/abstract/connection_pool.rb:292:in `with_connection'
+E:/Nico/Documents/Git/Ruby/ehcofan_server/app/jobs/fetch_articles_job.rb:7:in `perform'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/sucker_punch-2.0.2/lib/sucker_punch/job.rb:54:in `__run_perform'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/sucker_punch-2.0.2/lib/sucker_punch/job.rb:36:in `block in perform_async'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/concurrent-ruby-1.0.2/lib/concurrent/executor/ruby_thread_pool_executor.rb:348:in `call'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/concurrent-ruby-1.0.2/lib/concurrent/executor/ruby_thread_pool_executor.rb:348:in `run_task'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/concurrent-ruby-1.0.2/lib/concurrent/executor/ruby_thread_pool_executor.rb:337:in `block (3 levels) in create_worker'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/concurrent-ruby-1.0.2/lib/concurrent/executor/ruby_thread_pool_executor.rb:320:in `loop'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/concurrent-ruby-1.0.2/lib/concurrent/executor/ruby_thread_pool_executor.rb:320:in `block (2 levels) in create_worker'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/concurrent-ruby-1.0.2/lib/concurrent/executor/ruby_thread_pool_executor.rb:319:in `catch'
+E:/Programme/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/concurrent-ruby-1.0.2/lib/concurrent/executor/ruby_thread_pool_executor.rb:319:in `block in create_worker'

@@ -8,14 +8,14 @@ class FetchTeamsJob < ActiveJob::Base
 	  		if(schedule.teams_running)
 	  			puts "------------------------ Scheduled job started: Fetching teams -----------------------"
 	  			
-	  			fetch_teams "http://dvdata.sihf.ch/Statistic/api/cms/cache300?alias=standing&size=L&searchQuery=1//1,2&filterQuery=2016/2/2204&filterBy=Season,League,Phase&orderBy=rank&orderByDescending=false&callback=externalStatisticsCallback&skip=-1&language=de"
+	  			fetch_teams "http://dvdata.sihf.ch/Statistic/api/cms/cache300?alias=standing&size=L&searchQuery=1//1,2&filterQuery=2016/2/2204&filterBy=Season,League,Phase&orderBy=rank&orderByDescending=false&callback=externalStatisticsCallback&skip=-1&language=de", "NLB 16/17"
 			   
 			   	FetchMatchesJob.perform_in(schedule.teams_interval)
 			end
 		end		
 	end
 
-	def fetch_teams(uri)
+	def fetch_teams(uri, competition)
   		require 'net/http'
 		require 'json'
 		uri = URI(uri)
@@ -40,6 +40,7 @@ class FetchTeamsJob < ActiveJob::Base
   			team.losses = t[8]
   			team.goals_for = t[9]
   			team.goals_against = t[10]
+  			team.competition = competition
   			team.save
   		end
   end		
