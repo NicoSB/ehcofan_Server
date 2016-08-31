@@ -27,5 +27,6 @@ module EhcofanServer
   Rails.application.config.after_initialize do
     FetchArticlesJob.perform_async()
     FetchMatchesJob.perform_async()
+    FetchPlayerStatsJob.perform_async()
   end
 end

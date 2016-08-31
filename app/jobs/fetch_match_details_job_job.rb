@@ -5,6 +5,7 @@ class FetchMatchDetailsJobJob < ActiveJob::Base
   def perform(*args)
 		require 'net/http'
 		require 'json'
+		puts "------------------------ Scheduled job started: Fetching match details ------------------------"	
 		id = args[0]
 		uri = URI("http://dvdata.sihf.ch/statistic/api/cms/gameoverview?alias=gameDetail&searchQuery=#{id}&callback=externalStatisticsCallback&language=de")
 		response = Net::HTTP.get(uri)
@@ -41,6 +42,8 @@ class FetchMatchDetailsJobJob < ActiveJob::Base
 
 		if(status != "Ende")
 			FetchMatchDetailsJobJob.perform_in(60, id)
+		else
+			FetchPlayerStatsJob.perform_in(1800)
 		end
 	end
   

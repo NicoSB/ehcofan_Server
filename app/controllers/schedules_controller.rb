@@ -51,6 +51,6 @@ class SchedulesController < ApplicationController
 
   	private
 		def schedule_params
-			params.require(:schedule).permit(:articles_running, :articles_interval, :matches_running, :matches_interval, match_urls: [])	
+			params.require(:schedule).permit(:articles_running, :articles_interval, :matches_running, :matches_interval)	
 		end
 end

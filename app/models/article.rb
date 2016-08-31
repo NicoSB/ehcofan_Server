@@ -29,7 +29,7 @@ class Article < ActiveRecord::Base
 				"to" => "/topics/news",
 				"notification" => {
 					"title" => self.title,
-					"body" => body[0,30]
+					"body" => body[0,body.index(".")]
 				}
 			}.to_json
 
