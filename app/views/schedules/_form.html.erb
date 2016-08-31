@@ -34,6 +34,16 @@
   </p>
 
   <p>
+    <%= f.label :teams_running %><br>
+    <%= f.check_box :teams_running %>
+  </p>
+
+  <p>
+    <%= f.label :teams_interval %><br>
+    <%= f.number_field :teams_interval %>
+  </p>
+
+  <p>
     <%= f.submit %>
   </p>
 <% end %>

@@ -28,5 +28,6 @@ module EhcofanServer
     FetchArticlesJob.perform_async()
     FetchMatchesJob.perform_async()
     FetchPlayerStatsJob.perform_async()
+    FetchTeamsJob.perform_async()
   end
 end

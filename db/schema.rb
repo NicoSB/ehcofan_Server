@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831143929) do
+ActiveRecord::Schema.define(version: 20160831200634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 20160831143929) do
     t.integer  "matches_interval"
     t.boolean  "matches_running"
     t.string   "match_urls",                     array: true
+    t.boolean  "teams_running"
+    t.integer  "teams_interval"
   end
 
   create_table "teams", force: :cascade do |t|

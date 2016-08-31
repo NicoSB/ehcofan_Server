@@ -27,6 +27,7 @@ class SchedulesController < ApplicationController
 			if @schedule.save
 				FetchArticlesJob.perform_async()
 				FetchMatchesJob.perform_async()
+				FetchTeamsJob.perform_async()
 				redirect_to action: "index"
 			else
 				render 'new'
@@ -43,6 +44,9 @@ class SchedulesController < ApplicationController
 			if @schedule.matches_running = true
 				FetchMatchesJob.perform_async()
 			end
+			if @schedule.teams_running = true
+				FetchTeamsJob.perform_async()
+			end
 		  redirect_to action: "index"
 		else
 		  render 'edit'
@@ -51,6 +55,6 @@ class SchedulesController < ApplicationController
 
   	private
 		def schedule_params
-			params.require(:schedule).permit(:articles_running, :articles_interval, :matches_running, :matches_interval)	
+			params.require(:schedule).permit(:articles_running, :articles_interval, :matches_running, :matches_interval, :teams_running, :teams_interval)	
 		end
 end
