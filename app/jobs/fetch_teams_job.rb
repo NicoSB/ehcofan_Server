@@ -36,8 +36,8 @@ class FetchTeamsJob < ActiveJob::Base
   			end
 
   			team.wins = t[3]
-  			team.ot_wins = t[4] + t[5]
-  			team.ot_losses = t[6] + t[7]
+  			team.ot_wins = t[4].to_i + t[5].to_i
+  			team.ot_losses = t[6].to_i + t[7].to_i
   			team.losses = t[8]
   			team.goals_for = t[9]
   			team.goals_against = t[10]
