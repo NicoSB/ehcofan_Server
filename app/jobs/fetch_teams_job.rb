@@ -29,6 +29,7 @@ class FetchTeamsJob < ActiveJob::Base
 			team = nil
 			if(Team.exists?(name: t[1]["name"]))
   				team = Team.find_by(name: t[1]["name"])
+
   			else
   				team = Team.new
   				team.name = t[1]["name"]
@@ -41,6 +42,7 @@ class FetchTeamsJob < ActiveJob::Base
   			team.goals_for = t[9]
   			team.goals_against = t[10]
   			team.competition = competition
+  			team.group = ""
   			team.save
   		end
   end		
