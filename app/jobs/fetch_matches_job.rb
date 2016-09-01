@@ -15,7 +15,9 @@ class FetchMatchesJob < ActiveJob::Base
 					
 				    FetchMatchesJob.perform_in(schedule.matches_interval)
 				end
-				schedule_next_details_job 
+				if(Match != nil)
+					schedule_next_details_job 
+				end
 			end		
 	 	end
 	 end
@@ -39,12 +41,12 @@ class FetchMatchesJob < ActiveJob::Base
 				else
 					match = Match.new
 				end
-				match.datetime = "#{g[1]} #{g[2]}:00+0100"
+				match.datetime = "#{g[1]} #{g[2]}:00"
 				
 				# adapt to summertime
-				if(match.datetime < DateTime.new(2016,10,30))
-					match.datetime.change(hour: 1)
-				end
+				# if(match.datetime < DateTime.new(2016,10,30))
+				# 	match.datetime.change(hour: 1)
+				# end
 				puts match.datetime
 				match.home_team = g[3]["name"]
 				match.away_team = g[4]["name"]
@@ -75,14 +77,14 @@ class FetchMatchesJob < ActiveJob::Base
 
 		def schedule_next_details_job
 			require 'date'
-			next_match = Match.where("datetime > current_timestamp - interval '4 hours'").order("datetime ASC").take
-			if(next_match.nl_id != nil && @@lock != next_match.nl_id)
+			next_match = Match.select("timezone('Europe/Zurich', datetime) as datetime, nl_id").where("timezone('Europe/Zurich', datetime) > current_timestamp - interval '4 hours'").order("datetime ASC").take
+			if(next_match["nl_id"] != nil && @@lock != next_match["nl_id"])
 				@@lock = next_match.nl_id
-				wait_time = (next_match.datetime - DateTime.now)
+				wait_time = (next_match["datetime"] - DateTime.now)
 				if(wait_time < 0)
 					wait_time = 1
 				end
-				FetchMatchDetailsJobJob.perform_in(wait_time, next_match.nl_id)
+				FetchMatchDetailsJobJob.perform_in(wait_time, next_match["nl_id"])
 			end
 		end
  end
