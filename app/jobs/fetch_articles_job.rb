@@ -32,7 +32,7 @@ class FetchArticlesJob < ActiveJob::Base
 		contents.each do |line|
 			if trigger
 				#Date
-				if line =~ /[1-3]?[0-9]\.1?[0-9]\.201[0-9]{1}/
+				if line =~ /<span class="date">[1-3]?[0-9]\.1?[0-9]\.201[0-9]{1}<\/span>/
 					cache_article.date = line.slice(/[1-3]?[0-9]\.1?[0-9]\.201[0-9]{1}/)
 					if (newest_article[0] != nil && cache_article.date < newest_article[0].date)
 						return nil
