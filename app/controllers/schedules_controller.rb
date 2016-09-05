@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController
-	http_basic_authenticate_with name: "admin", password: password: ENV['ADMIN_PW'], except: [:index]
+	http_basic_authenticate_with name: "admin", password: ENV['ADMIN_PW'], except: [:index]
 	
 	def index
 		if Schedule.count == 0
