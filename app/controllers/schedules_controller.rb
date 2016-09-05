@@ -28,7 +28,7 @@ class SchedulesController < ApplicationController
 			@schedule = Schedule.new(schedule_params)
 			if @schedule.save
 				FetchArticlesJob.perform_async()
-				FetchscheduleesJob.perform_async()
+				FetchMatchesJob.perform_async()
 				FetchTeamsJob.perform_async()
 				redirect_to action: "index"
 			else
@@ -43,8 +43,8 @@ class SchedulesController < ApplicationController
 			if @schedule.articles_running = true
 				FetchArticlesJob.perform_async()
 			end
-			if @schedule.schedules_running = true
-				FetchscheduleesJob.perform_async()
+			if @schedule.matches_running = true
+				FetchMatchesJob.perform_async()
 			end
 			if @schedule.teams_running = true
 				FetchTeamsJob.perform_async()
