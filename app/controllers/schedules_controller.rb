@@ -1,4 +1,6 @@
 class SchedulesController < ApplicationController
+	http_basic_authenticate_with name: "admin", password: "er34sie", except: [:index]
+	
 	def index
 		if Schedule.count == 0
 			redirect_to action: "new"
@@ -26,7 +28,7 @@ class SchedulesController < ApplicationController
 			@schedule = Schedule.new(schedule_params)
 			if @schedule.save
 				FetchArticlesJob.perform_async()
-				FetchMatchesJob.perform_async()
+				FetchscheduleesJob.perform_async()
 				FetchTeamsJob.perform_async()
 				redirect_to action: "index"
 			else
@@ -41,8 +43,8 @@ class SchedulesController < ApplicationController
 			if @schedule.articles_running = true
 				FetchArticlesJob.perform_async()
 			end
-			if @schedule.matches_running = true
-				FetchMatchesJob.perform_async()
+			if @schedule.schedulees_running = true
+				FetchscheduleesJob.perform_async()
 			end
 			if @schedule.teams_running = true
 				FetchTeamsJob.perform_async()
@@ -53,8 +55,15 @@ class SchedulesController < ApplicationController
 		end
 	end
 
+	def destroy
+		@schedule = Schedule.find(params[:id])
+		@schedule.destroy
+
+		redirect_to schedules_path(mode: "control")
+	end
+
   	private
 		def schedule_params
-			params.require(:schedule).permit(:articles_running, :articles_interval, :matches_running, :matches_interval, :teams_running, :teams_interval)	
+			params.require(:schedule).permit(:articles_running, :articles_interval, :schedulees_running, :schedulees_interval, :teams_running, :teams_interval)	
 		end
 end

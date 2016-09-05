@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>competition</th>
+    <th>group</th>
+    <th></th>
+    <th></th>
+  </tr>
+ 
+  <% @teams.each do |team| %>
+    <tr>
+      <td><%= team.id %></td>
+      <td><%= team.name %></td>
+      <td><%= team.competition %></td>
+      <td><%= team.group %></td>
+      <td><%= link_to 'Edit', edit_team_path(team) %></td>
+      <td><%= link_to 'Destroy', team_path(team),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'back', root_path %>

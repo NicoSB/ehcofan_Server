@@ -1,7 +1,13 @@
 class TeamsController < ApplicationController
+	http_basic_authenticate_with name: "admin", password: "er34sie", except: [:index]
+
 	def index
-		@teams = Team.where(competition: params[:competition]).order("teams.group ASC, wins*3 + ot_wins*2 + ot_losses DESC, goals_for - goals_against DESC , goals_for DESC")
-		render :json => @teams, :except=>[:updated_at, :created_at]
+		if(params[:mode] != nil && params[:mode] == "control")
+			@teams = Team.all
+		else
+			@teams = Team.where(competition: params[:competition]).order("teams.group ASC, wins*3 + ot_wins*2 + ot_losses DESC, goals_for - goals_against DESC , goals_for DESC")
+			render :json => @teams, :except=>[:updated_at, :created_at]
+		end
 	end
 
   	def show
@@ -35,6 +41,12 @@ class TeamsController < ApplicationController
 		end
 	end
 
+	def destroy
+		@team = Team.find(params[:id])
+		@team.destroy
+
+		redirect_to teams_path(mode: "control")
+	end
 
 	private
 		def team_params

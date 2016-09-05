@@ -1,11 +1,17 @@
 class PlayersController < ApplicationController
+	http_basic_authenticate_with name: "admin", password: "er34sie", except: [:index]
+
 	def index
-		if(params[:updated_at] != nil)
-			@players = Player.where("updated_at > :last_updated", {last_updated: params[:updated_at]})
+		if(params[:mode] != nil && params[:mode] == "control")
+			@players = Player.all
 		else
-			@players = Player.order("position != 'Torhüter', position != 'Verteidiger', position != 'Stürmer', number ASC")
+			if(params[:updated_at] != nil)
+				@players = Player.where("updated_at > :last_updated", {last_updated: params[:updated_at]})
+			else
+				@players = Player.order("position != 'Torhüter', position != 'Verteidiger', position != 'Stürmer', number ASC")
+			end
+			render :json => @players, :except=>[:created_at, :player_image_content_type, :player_image_file_size, :player_image_updated_at]
 		end
-		render :json => @players, :except=>[:created_at, :player_image_content_type, :player_image_file_size, :player_image_updated_at]
 	end
 
   	def show
@@ -39,6 +45,12 @@ class PlayersController < ApplicationController
 		end
 	end
 
+	def destroy
+		@player = Player.find(params[:id])
+		@player.destroy
+
+		redirect_to players_path(mode: "control")
+	end
 
 	private
 		def player_params

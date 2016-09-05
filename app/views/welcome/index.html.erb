@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> EHCO Fan-Control Pane </title>
+	</head>
+	<body>
+		<h1>EHCO Fan-Control Panel</h1>
+
+		<div id="panel_top_header">
+			<%= link_to 'articles'.html_safe, articles_path(mode: "control") %>
+			<%= link_to 'matches'.html_safe, matches_path(mode: "control") %>
+			<%= link_to 'teams'.html_safe, teams_path(mode: "control") %>
+			<%= link_to 'players'.html_safe, players_path(mode: "control") %>
+		</div>
+		<div id="panel_jobs">
+			<table
+				border="0"
+				cellspacing="10">
+				<tr>
+					<td> <strong>Job</strong> </td>
+					<td> running? </td>
+					<td> delay </td>
+				</tr>
+					<td> <strong>Fetch_articles_job</strong> </td>
+					<td>
+						<% if @schedule.articles_running %> 
+							<font color="green">yes</font>
+						<% else %>
+							<font color="red">no</font>
+						<% end %>
+					</td>
+					<td> <%= @schedule.articles_interval %>s</td>
+				</tr>
+				
+				<tr>
+					<td> <strong>Fetch_matches_job</strong> </td>
+					<td>
+						<% if @schedule.matches_running %> 
+							<font color="green">yes</font>
+						<% else %>
+							<font color="red">no</font>
+						<% end %>
+					</td>
+					<td> <%= @schedule.matches_interval %>s</td>
+				</tr>
+
+				<tr>
+					<td> <strong>Fetch_teams_job</strong> </td>
+					<td>
+						<% if @schedule.teams_running %> 
+							<font color="green">yes</font>
+						<% else %>
+							<font color="red">no</font>
+						<% end %>
+					</td>
+					<td> <%= @schedule.teams_interval %>s</td>
+				</tr>
+			</table>
+
+			<%= link_to '<button type="button">edit</button>'.html_safe, edit_schedule_path(@schedule) %>
+		</div>
+	</body>
+</html>

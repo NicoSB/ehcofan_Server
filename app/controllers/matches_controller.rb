@@ -1,12 +1,18 @@
 class MatchesController < ApplicationController
+	http_basic_authenticate_with name: "admin", password: "er34sie", except: [:index]
+
 	def index
+		if(params[:mode] != nil && params[:mode] == "control")
+			@matches = Match.all
+		else	
 			if(params[:updated_at] != nil)
 				query = "updated_at > :last_updated", {last_updated: params[:updated_at]}
 				@matches = Match.where(query).order("datetime ASC")
 			else
 				@matches = Match.all.order("datetime ASC")
 			end
-		render :json => @matches
+			render :json => @matches
+		end
 	end
 
   	def show
@@ -40,6 +46,12 @@ class MatchesController < ApplicationController
 		end
 	end
 
+	def destroy
+		@match = Match.find(params[:id])
+		@match.destroy
+
+		redirect_to matches_path(mode: "control")
+	end
 
 	private
 		def match_params

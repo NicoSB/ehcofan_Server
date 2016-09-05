@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <th>id</th>
+    <th>home_team</th>
+    <th>away_team</th>
+    <th>competition</th>
+    <th>datetime</th>
+    <th></th>
+    <th></th>
+  </tr>
+ 
+  <% @matches.each do |match| %>
+    <tr>
+      <td><%= match.id %></td>
+      <td><%= match.home_team %></td>
+      <td><%= match.away_team %></td>
+      <td><%= match.competition %></td>
+      <td><%= match.datetime %></td>
+      <td><%= link_to 'Edit', edit_match_path(match) %></td>
+      <td><%= link_to 'Destroy', match_path(match),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'back', root_path %>
