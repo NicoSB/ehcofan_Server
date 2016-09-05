@@ -43,7 +43,7 @@ class SchedulesController < ApplicationController
 			if @schedule.articles_running = true
 				FetchArticlesJob.perform_async()
 			end
-			if @schedule.schedulees_running = true
+			if @schedule.schedules_running = true
 				FetchscheduleesJob.perform_async()
 			end
 			if @schedule.teams_running = true
