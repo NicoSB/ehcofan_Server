@@ -64,6 +64,6 @@ class SchedulesController < ApplicationController
 
   	private
 		def schedule_params
-			params.require(:schedule).permit(:articles_running, :articles_interval, :schedulees_running, :schedulees_interval, :teams_running, :teams_interval)	
+			params.require(:schedule).permit(:articles_running, :articles_interval, :matches_running, :matches_interval, :teams_running, :teams_interval)	
 		end
 end
