@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-	http_basic_authenticate_with name: "admin", password: "er34sie", except: [:index]
+	http_basic_authenticate_with name: "admin", password: ENV['ADMIN_PW'], except: [:index]
 
 	def index
 		if(params[:mode] != nil && params[:mode] == "control")
