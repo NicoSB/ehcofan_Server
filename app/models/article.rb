@@ -22,8 +22,9 @@ class Article < ActiveRecord::Base
 			}
 
 			body = self.text
-			body.slice!("<b>")
-			body.slice!("<strong>")
+			while(body[0]=="<")
+				body.slice!(/<[\w=\"]+>/)
+			end
 			
 			to_send = { 
 				"to" => "/topics/news",

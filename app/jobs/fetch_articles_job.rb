@@ -137,6 +137,8 @@ class FetchArticlesJob < ActiveJob::Base
 		text.gsub! "&uuml;", "ü"
 		text.gsub! "&auml;", "ä"
 		text.gsub! "&ouml;", "ö"
+		text.gsub! "&ndash;", "-"
+		text.gsub! /&[\w]{2}quo;/, "\""
 		return text
 	end
 end
