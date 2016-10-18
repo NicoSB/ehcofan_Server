@@ -64,7 +64,9 @@ class FetchArticlesJob < ActiveJob::Base
 		end
 
 		articles.reverse_each do |a|
-			a.save
+			if(!Article.exists?(:url => a.url))
+				a.save
+			end
 		end 
 	end
 	#fetches the text from the given url
