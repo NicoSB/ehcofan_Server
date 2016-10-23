@@ -5,6 +5,7 @@
     <th>name</th>
     <th>surname</th>
     <th>position</th>
+    <th>active</th>
     <th></th>
     <th></th>
   </tr>
@@ -16,6 +17,7 @@
       <td><%= player.name %></td>
       <td><%= player.surname %></td>
       <td><%= player.position %></td>
+      <td><%= player.active %></td>
       <td><%= link_to 'Edit', edit_player_path(player) %></td>
       <td><%= link_to 'Destroy', player_path(player),
               method: :delete,
@@ -24,4 +26,5 @@
   <% end %>
 </table>
 
+<%= link_to 'New player', new_article_path %>
 <%= link_to 'back', root_path %>

@@ -4,6 +4,7 @@
     <th>name</th>
     <th>competition</th>
     <th>group</th>
+    <th>active</th>
     <th></th>
     <th></th>
   </tr>
@@ -14,6 +15,7 @@
       <td><%= team.name %></td>
       <td><%= team.competition %></td>
       <td><%= team.group %></td>
+      <td><%= team.active %></td>
       <td><%= link_to 'Edit', edit_team_path(team) %></td>
       <td><%= link_to 'Destroy', team_path(team),
               method: :delete,
@@ -21,4 +23,5 @@
     </tr>
   <% end %>
 </table>
+<%= link_to 'New team', new_team_path %>
 <%= link_to 'back', root_path %>

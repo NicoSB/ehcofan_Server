@@ -4,4 +4,8 @@ class Match < ActiveRecord::Base
 	validates :competition, presence: true
 	validates :datetime, presence: true
 	validates :nl_id, uniqueness: true
+
+	def destroy
+		update_attribute(:active, false)
+	end
 end

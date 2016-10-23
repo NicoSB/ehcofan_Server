@@ -5,6 +5,7 @@
     <th>away_team</th>
     <th>competition</th>
     <th>datetime</th>
+    <th>active</th>
     <th></th>
     <th></th>
   </tr>
@@ -16,6 +17,7 @@
       <td><%= match.away_team %></td>
       <td><%= match.competition %></td>
       <td><%= match.datetime %></td>
+      <td><%= match.active %></td>
       <td><%= link_to 'Edit', edit_match_path(match) %></td>
       <td><%= link_to 'Destroy', match_path(match),
               method: :delete,
@@ -24,4 +26,5 @@
   <% end %>
 </table>
 
+<%= link_to 'New match', new_article_path %>
 <%= link_to 'back', root_path %>

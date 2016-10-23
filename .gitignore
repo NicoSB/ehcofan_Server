@@ -17,5 +17,6 @@
 /tmp
 /public/system
 config/database.yml
+config/local_env.yml
 
 .env
