@@ -17,7 +17,7 @@ class Article < ActiveRecord::Base
 			https = Net::HTTP.new(uri.host,uri.port)
 			https.use_ssl = true
 			headers = {
-			  'Authorization' => "key=AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE",
+			  'Authorization' => "key=" + ENV['FIREBASE_KEY'],
 			  'Content-Type' => 'application/json'
 			}
 

@@ -5,7 +5,11 @@ class ArticlesController < ApplicationController
 		if(params[:mode] != nil && params[:mode] == "control")
 			@articles = Article.all
 		else
-			@articles = Article.limit(5).offset(params[:offset]).order("date DESC, id DESC")
+			limit = 5
+			if(params[:limit] != nil)
+				limit = params[:limit]
+			end
+			@articles = Article.limit(limit).offset(params[:offset]).order("date DESC, id DESC")
 			render :json => @articles, :except=>[:news_image_file_size, :news_image_updated_at, :news_image_content_type, :updated_at, :created_at]
 		end
 	end
