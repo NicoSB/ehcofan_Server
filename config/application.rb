@@ -25,9 +25,9 @@ module EhcofanServer
     config.active_record.raise_in_transactional_callbacks = true
   end
   Rails.application.config.after_initialize do
-    #FetchArticlesJob.perform_async()
-   # FetchMatchesJob.perform_async()
-   # FetchTeamsJob.perform_async()
+    FetchArticlesJob.perform_async()
+    FetchMatchesJob.perform_async()
+    FetchTeamsJob.perform_async()
     FetchPlayerStatsJob.perform_async()
   end
   Rails.application.config.before_configuration do
