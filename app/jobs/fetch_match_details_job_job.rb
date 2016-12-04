@@ -45,6 +45,5 @@ class FetchMatchDetailsJobJob < ActiveJob::Base
 		else
 			FetchPlayerStatsJob.perform_in(1800)
 		end
-	end
-  
+	end  
 end

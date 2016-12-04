@@ -68,7 +68,7 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.10.0)
+    coffee-script-source (1.8.0)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     erubis (2.7.0)
@@ -183,6 +183,7 @@ DEPENDENCIES
   aws-sdk (~> 2.3)
   byebug
   coffee-rails (~> 4.1.0)
+  coffee-script-source (= 1.8.0)
   jbuilder (~> 2.0)
   jquery-rails
   paperclip!
@@ -202,4 +203,4 @@ RUBY VERSION
    ruby 2.2.4p230
 
 BUNDLED WITH
-   1.12.5
+   1.13.6

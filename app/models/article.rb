@@ -5,7 +5,7 @@ class Article < ActiveRecord::Base
 	has_attached_file :news_image, :default_url => "/images/default.jpg"
 	validates_attachment :news_image, content_type: { content_type: /\Aimage\/.*\Z/ }
 
-	after_create :send_notification, on: :create
+	#after_create :send_notification, on: :create
 
 	private
 		def send_notification
@@ -25,11 +25,12 @@ class Article < ActiveRecord::Base
 			body.gsub!(/<[\w\s=\"]+>/, "")
 			
 			to_send = { 
-				"to" => "/topics/news",
+				"to" => "/topics/testnews",
 				"notification" => {
 					"title" => self.title,
 					"body" => body[0,body.index(".")]
-				}
+				},
+				"time_to_live" => 172800 #equals 2 days
 			}.to_json
 
 			request = Net::HTTP::Post.new(uri.path, initheader = headers)
