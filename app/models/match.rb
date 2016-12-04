@@ -13,7 +13,7 @@ class Match < ActiveRecord::Base
 
 
 	def fetch_goal_scorer
-		if(:h1_changed? || :h2_changed || :h3_changed || :h_ot_changed || :a1_changed || :a2_changed || :a3_changed || :a_ot_changed)
+		if((:h1_changed? || :h2_changed || :h3_changed || :h_ot_changed || :a1_changed || :a2_changed || :a3_changed || :a_ot_changed) && self.status.length > 4)
 			require 'net/http'
 			require 'json'
 			puts "------------------------ Fetch goal_scorer ------------------------"	

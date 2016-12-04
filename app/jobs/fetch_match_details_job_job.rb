@@ -13,9 +13,11 @@ class FetchMatchDetailsJobJob < ActiveJob::Base
 		response.slice!(");")
 
 		json = JSON.parse(response)
+		status = json["status"]["name"]
 		scores = json["result"]["scores"]
 
 		match = Match.find_by nl_id: id
+		match.status = status
 
 		if(scores[0]["homeTeam"] != "-")
 			match.h1 = scores[0]["homeTeam"]
