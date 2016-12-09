@@ -25,7 +25,7 @@ class Article < ActiveRecord::Base
 			body.gsub!(/<[\w\s=\"]+>/, "")
 			
 			to_send = { 
-				"to" => "/topics/testnews",
+				"to" => "/topics/news",
 				"notification" => {
 					"title" => self.title,
 					"body" => body[0,body.index(".")]
