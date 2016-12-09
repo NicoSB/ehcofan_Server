@@ -42,11 +42,7 @@ class FetchMatchesJob < ActiveJob::Base
 					match = Match.new
 				end
 				match.datetime = "#{g[1]} #{g[2]}:00"
-				
-				# adapt to summertime
-				# if(match.datetime < DateTime.new(2016,10,30))
-				# 	match.datetime.change(hour: 1)
-				# end
+
 				puts match.datetime
 				match.home_team = g[3]["name"]
 				match.away_team = g[4]["name"]

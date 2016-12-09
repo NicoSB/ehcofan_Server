@@ -20,7 +20,7 @@ class Match < ActiveRecord::Base
 			id = self.nl_id
 			current_score = (self.h1.to_i + self.h2.to_i + self.h3.to_i + self.h_ot.to_i).to_s + ":" +  (self.a1.to_i + self.a2.to_i + self.a3.to_i + self.a_ot.to_i).to_s 
 			uri = URI("http://dvdata.sihf.ch/statistic/api/cms/gameoverview?alias=gameDetail&searchQuery=#{id}&callback=externalStatisticsCallback&language=de")
-			puts current_score
+
 			response = Net::HTTP.get(uri)
 			response.slice!("externalStatisticsCallback(")
 			response.slice!(");")
