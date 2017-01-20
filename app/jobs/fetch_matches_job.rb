@@ -43,6 +43,13 @@ class FetchMatchesJob < ActiveJob::Base
 				end
 				match.datetime = "#{g[1]} #{g[2]}:00"
 
+			
+				require 'date'
+
+				if(Date.parse("#{g[1]}") < Date.today() - 1)
+					match.status = "Ende"
+				end
+				
 				puts match.datetime
 				match.home_team = g[3]["name"]
 				match.away_team = g[4]["name"]

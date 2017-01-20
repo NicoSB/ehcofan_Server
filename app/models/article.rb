@@ -12,6 +12,7 @@ class Article < ActiveRecord::Base
 			require 'net/http'
 			require 'net/https'
 			require 'uri'
+			require 'openssl'
 
 			uri = URI.parse("https://fcm.googleapis.com/fcm/send")
 			https = Net::HTTP.new(uri.host,uri.port)
@@ -25,8 +26,17 @@ class Article < ActiveRecord::Base
 			body.gsub!(/<[\w\s=\"]+>/, "")
 			
 			to_send = { 
+				"to" => "/topics/news2",
+				"data" => {
+					"title" => self.title,
+					"body" => body[0,body.index(".")]
+				},
+				"time_to_live" => 172800 #equals 2 days
+			}.to_json
+
+			to_send2 = { 
 				"to" => "/topics/news",
-				"notification" => {
+				"data" => {
 					"title" => self.title,
 					"body" => body[0,body.index(".")]
 				},
@@ -35,6 +45,13 @@ class Article < ActiveRecord::Base
 
 			request = Net::HTTP::Post.new(uri.path, initheader = headers)
 			request.body = to_send
+			https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+			res = https.request(request)			
+			puts "Response #{res.code} #{res.message}: #{res.body}"
+
+			request.body = to_send2
+			https.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 			res = https.request(request)
 			puts "Response #{res.code} #{res.message}: #{res.body}"

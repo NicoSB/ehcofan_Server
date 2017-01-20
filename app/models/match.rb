@@ -13,7 +13,7 @@ class Match < ActiveRecord::Base
 
 
 	def fetch_goal_scorer
-		if((:h1_changed? || :h2_changed || :h3_changed || :h_ot_changed || :a1_changed || :a2_changed || :a3_changed || :a_ot_changed) && self.status.length > 4)
+		if((h1_changed? || h2_changed? || h3_changed? || h_ot_changed? || a1_changed? || a2_changed? || a3_changed? || a_ot_changed?) && self.status.length > 4)
 			require 'net/http'
 			require 'json'
 			puts "------------------------ Fetch goal_scorer ------------------------"	
@@ -51,7 +51,7 @@ class Match < ActiveRecord::Base
 		https = Net::HTTP.new(uri.host,uri.port)
 		https.use_ssl = true
 		headers = {
-		  'Authorization' => "key=" + "AIzaSyBaLCHWTBUrRa_h5AeXjBYcfz3OIz7q8iE",# ENV['FIREBASE_KEY'],
+		  'Authorization' => "key=" + ENV['FIREBASE_KEY'],
 		  'Content-Type' => 'application/json'
 		}
 		

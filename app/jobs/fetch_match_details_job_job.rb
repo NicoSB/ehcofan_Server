@@ -40,12 +40,11 @@ class FetchMatchDetailsJobJob < ActiveJob::Base
 		end
 
 		match.save
-		status = json["status"]["name"]
 
-		if(status != "Ende")
-			FetchMatchDetailsJobJob.perform_in(60, id)
-		else
+		if(status.include?("Ende"))
 			FetchPlayerStatsJob.perform_in(1800)
+		else
+			FetchMatchDetailsJobJob.perform_in(60, id)
 		end
 	end  
 end
