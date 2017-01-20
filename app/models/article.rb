@@ -36,7 +36,7 @@ class Article < ActiveRecord::Base
 
 			to_send2 = { 
 				"to" => "/topics/news",
-				"data" => {
+				"notification" => {
 					"title" => self.title,
 					"body" => body[0,body.index(".")]
 				},
