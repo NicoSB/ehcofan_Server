@@ -57,7 +57,7 @@ class Match < ActiveRecord::Base
 		
 		to_send = { 
 			"to" => "/topics/testgoals",
-			"notification" => {
+			"data" => {
 				"title" => "TOOOOOOOOR!",
 				"body" => text
 			},
