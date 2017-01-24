@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :playoffs
   get 'welcome/index'
 
   resources :articles

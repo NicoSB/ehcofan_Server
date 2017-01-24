@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team1: MyString
+  team2: MyString
+  title: MyString
+  running: false
+  g1: 1
+  g2: 1
+  g3: 1
+  g4: 1
+  g5: 1
+  g6: 1
+  g7: 1
+
+two:
+  team1: MyString
+  team2: MyString
+  title: MyString
+  running: false
+  g1: 1
+  g2: 1
+  g3: 1
+  g4: 1
+  g5: 1
+  g6: 1
+  g7: 1
