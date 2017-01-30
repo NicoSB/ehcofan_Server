@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
 		if(params[:mode] != nil && params[:mode] == "control")
 			@players = Player.all
 		else
-			if(params[:updated_at] != nil)
+			if(params[:updated_at] != nil && params[:updated_at] != "")
 				@players = Player.where("updated_at > :last_updated", {last_updated: params[:updated_at]})
 			else
 				@players = Player.order("position != 'Torhüter', position != 'Verteidiger', position != 'Stürmer', number ASC")

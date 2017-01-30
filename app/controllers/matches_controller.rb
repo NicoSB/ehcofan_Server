@@ -5,7 +5,7 @@ class MatchesController < ApplicationController
 		if(params[:mode] != nil && params[:mode] == "control")
 			@matches = Match.all
 		else	
-			if(params[:updated_at] != nil)
+			if(params[:updated_at] != nil && params[:updated_at] != "")
 				query = "updated_at > :last_updated", {last_updated: params[:updated_at]}
 				@matches = Match.where(query).order("datetime ASC")
 			else
