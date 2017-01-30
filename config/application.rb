@@ -21,7 +21,6 @@ module EhcofanServer
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.web_console.whitelisted_ips = '192.168.0.59'
     config.active_job.queue_adapter = :sucker_punch
     config.active_record.raise_in_transactional_callbacks = true
   end
