@@ -29,7 +29,8 @@ class Article < ActiveRecord::Base
 				"to" => "/topics/news2",
 				"data" => {
 					"title" => self.title,
-					"body" => body[0,body.index(".")]
+					"body" => body[0,body.index(".")],
+					"type" => "news"
 				},
 				"time_to_live" => 172800 #equals 2 days
 			}.to_json

@@ -59,7 +59,8 @@ class Match < ActiveRecord::Base
 			"to" => "/topics/testgoals",
 			"data" => {
 				"title" => "TOOOOOOOOR!",
-				"body" => text
+				"body" => text,
+				"type" => "goal"
 			},
 			"time_to_live" => 300
 		}.to_json
