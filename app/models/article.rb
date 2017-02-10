@@ -30,7 +30,8 @@ class Article < ActiveRecord::Base
 				"data" => {
 					"title" => self.title,
 					"body" => body[0,body.index(".")],
-					"type" => "news"
+					"type" => "news",
+					"news_id" => self.id
 				},
 				"time_to_live" => 172800 #equals 2 days
 			}.to_json
@@ -52,7 +53,6 @@ class Article < ActiveRecord::Base
 			puts "Response #{res.code} #{res.message}: #{res.body}"
 
 			request.body = to_send2
-			https.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 			res = https.request(request)
 			puts "Response #{res.code} #{res.message}: #{res.body}"

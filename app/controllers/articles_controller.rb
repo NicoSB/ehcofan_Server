@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-	http_basic_authenticate_with name: "admin", password: ENV['ADMIN_PW'], except: [:index]
+	http_basic_authenticate_with name: "admin", password: ENV['ADMIN_PW'], :except => [:index, :show]
 
 	def index
 		if(params[:mode] != nil && params[:mode] == "control")

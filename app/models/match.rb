@@ -71,6 +71,5 @@ class Match < ActiveRecord::Base
 
 		res = https.request(request)
 		puts "Response #{res.code} #{res.message}: #{res.body}"
-
 	end
 end
