@@ -30,6 +30,8 @@ class Match < ActiveRecord::Base
 			for p in periods
 				for s in p["goals"]
 					new_score = s["text"].slice(/[0-9]+:[0-9]+/)
+					puts "c: " + current_score
+					puts "n: " + new_score
 					if(new_score == current_score)
 						text = s["text"]
 						text.gsub!("**", "")
@@ -55,8 +57,10 @@ class Match < ActiveRecord::Base
 		  'Content-Type' => 'application/json'
 		}
 		
+		topic = "/topics/" + ENV['TOPIC_GOAL']
+
 		to_send = { 
-			"to" => "/topics/testgoals",
+			"to" => topic,
 			"data" => {
 				"title" => "TOOOOOOOOR!",
 				"body" => text,

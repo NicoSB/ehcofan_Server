@@ -24,20 +24,22 @@ class Article < ActiveRecord::Base
 
 			body = self.text
 			body.gsub!(/<[\w\s=\"]+>/, "")
+			topic = "/topics/" + ENV['TOPIC_NEWS']
 			
 			to_send = { 
-				"to" => "/topics/news2",
+				"to" => topic,
 				"data" => {
 					"title" => self.title,
-					"body" => body[0,body.index(".")],
+					"body" => body[0,body.index(".")].strip(),
 					"type" => "news",
 					"news_id" => self.id
 				},
 				"time_to_live" => 172800 #equals 2 days
 			}.to_json
 
+			topic = "/topics/" + ENV['TOPIC_NEWS2']
 			to_send2 = { 
-				"to" => "/topics/news",
+				"to" => topic,
 				"notification" => {
 					"title" => self.title,
 					"body" => body[0,body.index(".")]
