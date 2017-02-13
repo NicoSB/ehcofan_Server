@@ -12,7 +12,7 @@ class FetchMatchesJob < ActiveJob::Base
 		  			
 		  			#fetch_matches "http://dvdata.sihf.ch/Statistic/api/cms/cache300?alias=results&searchQuery=1,8,10,11//1,2,4,5,8,9,20,47,48,49,50,90,81&filterQuery=2017/2/2204/09.09.2016-12.02.2017/102129&filterBy=Season,League,Phase,Date&orderBy=date&orderByDescending=false&take=50&callback=externalStatisticsCallback&skip=-1&language=de", "NLB 16/17"
 					#fetch_matches "http://dvdata.sihf.ch/Statistic/api/cms/table?alias=results&searchQuery=2//1,2,4,5&filterQuery=2017/2/29.07.2016-06.09.2016/102129&filterBy=Season,League,Date&orderBy=date&orderByDescending=false&take=20&callback=externalStatisticsCallback&skip=-1&language=de", "Vorbereitung"
-					fetch_playoff_matches "http://dvdata.sihf.ch/statistic/api/cms/cache300?alias=bestOf&searchQuery=1//1,2///27,18,2,3,4,21,22,23,24,7&filterQuery=2017/1/2106&filterBy=Season,League,Phase&callback=externalStatisticsCallback&skip=-1&language=de", "Playoffviertelfinale"
+					fetch_playoff_matches "http://dvdata.sihf.ch/statistic/api/cms/cache300?alias=bestOf&searchQuery=1//1,2///27,18,2,3,4,21,22,23,24,7&filterQuery=2017/1/2106&filterBy=Season,League,Phase&callback=externalStatisticsCallback&skip=-1&language=de", "Playoff 1/4-Finale"
 
 				    FetchMatchesJob.perform_in(schedule.matches_interval)
 				end
