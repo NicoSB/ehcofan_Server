@@ -30,8 +30,6 @@ class Match < ActiveRecord::Base
 			for p in periods
 				for s in p["goals"]
 					new_score = s["text"].slice(/[0-9]+:[0-9]+/)
-					puts "c: " + current_score
-					puts "n: " + new_score
 					if(new_score == current_score)
 						text = s["text"]
 						text.gsub!("**", "")
@@ -74,6 +72,6 @@ class Match < ActiveRecord::Base
 		https.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 		res = https.request(request)
-		puts "Response #{res.code} #{res.message}: #{res.body}"
+		puts "Response (#{topic}) #{res.code} #{res.message}: #{res.body}"
 	end
 end

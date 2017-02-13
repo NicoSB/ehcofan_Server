@@ -37,9 +37,9 @@ class Article < ActiveRecord::Base
 				"time_to_live" => 172800 #equals 2 days
 			}.to_json
 
-			topic = "/topics/" + ENV['TOPIC_NEWS2']
+			topic2 = "/topics/" + ENV['TOPIC_NEWS2']
 			to_send2 = { 
-				"to" => topic,
+				"to" => topic2,
 				"notification" => {
 					"title" => self.title,
 					"body" => body[0,body.index(".")]
@@ -52,11 +52,11 @@ class Article < ActiveRecord::Base
 			https.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 			res = https.request(request)			
-			puts "Response #{res.code} #{res.message}: #{res.body}"
+			puts "Response (#{topic}) #{res.code} #{res.message}: #{res.body}"
 
 			request.body = to_send2
 
 			res = https.request(request)
-			puts "Response #{res.code} #{res.message}: #{res.body}"
+			puts "Response (#{topic2}) #{res.code} #{res.message}: #{res.body}"
 		end
 end
