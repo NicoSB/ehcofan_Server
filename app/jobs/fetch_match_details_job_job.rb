@@ -42,6 +42,7 @@ class FetchMatchDetailsJobJob < ActiveJob::Base
 		match.save
 
 		if(status.include?("Ende"))
+			match.status = "Ende"
 			FetchPlayerStatsJob.perform_in(1800)
 		else
 			FetchMatchDetailsJobJob.perform_in(60, id)
