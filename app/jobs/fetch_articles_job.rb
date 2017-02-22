@@ -1,7 +1,7 @@
 class FetchArticlesJob < ActiveJob::Base
   include SuckerPunch::Job
   queue_as :default
-  URL = "http://www.ehco.ch/de/news.html"
+  URL = "http://www.ehco.ch/de/news-_content---1--1.html"
 
   def perform(*args)
   	ActiveRecord::Base.connection_pool.with_connection do
@@ -21,7 +21,8 @@ class FetchArticlesJob < ActiveJob::Base
   	def fetch_articles
 		require 'open-uri'
 		newest_article = Article.limit(1).order("date DESC")
-		trigger = false
+		news_trigger = false
+		title_trigger = false
 		articles = Array.new
 
 		file = open(URL)
@@ -29,36 +30,39 @@ class FetchArticlesJob < ActiveJob::Base
 		articles = Array.new
 		cache_article = nil
 		
+
 		contents.each do |line|
-			if trigger
+			if title_trigger
+				cache_article.title = replace_uml line.strip
+				cache_article.text = fetch_text cache_article.url
+				cache_article.text = replace_uml cache_article.text
+				articles.push(cache_article)
+
+				title_trigger = false
+				news_trigger = false
+			elsif news_trigger
 				#Date
-				if line =~ /<span class="date">[1-3]?[0-9]\.1?[0-9]\.201[0-9]{1}<\/span>/
-					cache_article.date = line.slice(/[1-3]?[0-9]\.1?[0-9]\.201[0-9]{1}/)
+				if line =~ /[1-3]?[0-9]\.[0-1]?[0-9]\.201[0-9]{1}/
+					cache_article.date = line.slice(/[1-3]?[0-9]\.[0-1]?[0-9]\.201[0-9]{1}/)
 					if (newest_article[0] != nil && cache_article.date < newest_article[0].date)
-						trigger = false
+						break
 					end
 				#Title
-				elsif line =~ /<h2>.+<\/h2>/
-					line.slice!("<h2>")
-					line.slice!("<\/h2>")
-					cache_article.title = replace_uml line.strip
+				elsif line.include? "box__title"
+					title_trigger = true
 				#Text
-				elsif line =~ /<p[^>]*>/
-					cache_article.text = fetch_text cache_article.url
-					cache_article.text = replace_uml cache_article.text
-					image_url = fetch_image_url cache_article.url
+				elsif line.include? ".jpg"
+					image_url = "http://www.ehco.ch" + line.downcase.slice(/\/upload\/.+\.jp[e]?g/)
 					
 					if(image_url != nil)
 						cache_article.news_image = URI.parse(image_url)
 					end
-					articles.push(cache_article)
-					trigger = false
 				#url
-				elsif line =~ /\/de\/newsdetail.+.html/
-					cache_article.url = "http://www.ehco.ch" + line.slice(/\/de\/newsdetail.+.html/)
+				elsif line =~ /\/de\/.+.html/
+					cache_article.url = "http://www.ehco.ch" + line.slice(/\/de\/.+.html/)
 				end
-			elsif line.include? "news-element newsarchiv"
-				trigger = true					
+			elsif line.include? "small-12 columns"
+				news_trigger = true					
 				cache_article = Article.new
 			end
 		end
@@ -66,20 +70,32 @@ class FetchArticlesJob < ActiveJob::Base
 		articles.reverse_each do |a|
 			if(!Article.exists?(:url => a.url))
 				a.save
+				if !a.errors.empty?
+					puts a.errors.inspect
+				end
 			end
 		end 
 	end
 	#fetches the text from the given url
 	def fetch_text(article_url)
 		require 'open-uri'
+		trigger = false
 		text = ""
 		file = open(article_url)
 		contents = file.readlines
 		contents.each do |line| 
-			if line =~ /<p[^>]*>/
-				line.slice!(/<p[^>]*>/)
-				line.slice!(/<\/p>/)
-				text = text + line + "<br/>" + "<br/>"
+			if trigger
+				if line.include? "<\/div>"
+					text = text + line.gsub("<\/div>", "")
+					trigger = false
+				end
+				text = text + line
+			elsif line.include? "<div class=\"lead\">"
+				trigger = true
+				text = text + line.gsub("<div class=\"lead\">", "")
+			elsif line.include? "<div class=\"text__content\">"
+				trigger = true
+				text = text + line.gsub("<div class=\"lead\">", "")
 			end
 		end
 		return text
@@ -142,6 +158,7 @@ class FetchArticlesJob < ActiveJob::Base
 		text.gsub! "&Uuml;", "Ü"
 		text.gsub! "&Auml;", "Ä"
 		text.gsub! "&Ouml;", "Ö"
+		text.gsub! "&euml;", "é"
 		text.gsub! "&quot;", "\""
 		text.gsub! "&ndash;", "-"
 		text.gsub! /&[\w]{2}quo;/, "\""
