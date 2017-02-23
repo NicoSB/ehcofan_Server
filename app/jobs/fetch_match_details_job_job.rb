@@ -39,13 +39,13 @@ class FetchMatchDetailsJobJob < ActiveJob::Base
 			match.a_ot = scores[3]["awayTeam"]
 		end
 
-		match.save
-
 		if(status.include?("Ende"))
 			match.status = "Ende"
 			FetchPlayerStatsJob.perform_in(1800)
 		else
-			FetchMatchDetailsJobJob.perform_in(60, id)
+			FetchMatchDetailsJobJob.perform_in(30, id)
 		end
+
+		match.save
 	end  
 end
