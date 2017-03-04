@@ -5,7 +5,7 @@ class Match < ActiveRecord::Base
 	validates :datetime, presence: true
 	validates :nl_id, uniqueness: true
 
-	after_update :fetch_goal_scorer
+	#after_update :fetch_goal_scorer
 
 	def destroy
 		update_attribute(:active, false)
